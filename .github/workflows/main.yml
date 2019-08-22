@@ -1,0 +1,21 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dependencies
+      run: npm i
+    - name: Run tests
+      run: npm t
+    - name: Check syntax
+      run: npm run lint -- --plugin log
