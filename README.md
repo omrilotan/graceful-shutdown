@@ -1,6 +1,8 @@
-# @routes/graceful-shutdown [![](https://circleci.com/gh/omrilotan/express-graceful-shutdown.svg?style=svg)](https://circleci.com/gh/omrilotan/express-graceful-shutdown) <a href="https://www.npmjs.com/package/@routes/graceful-shutdown"><img src="https://img.shields.io/npm/v/@routes/graceful-shutdown.svg"></a> [![](https://img.shields.io/badge/source--000000.svg?logo=github&style=social)](https://github.com/omrilotan/express-graceful-shutdown)
+# @routes/graceful-shutdown <a href="https://www.npmjs.com/package/@routes/graceful-shutdown"><img src="https://img.shields.io/npm/v/@routes/graceful-shutdown.svg"></a> [![](https://img.shields.io/badge/source--000000.svg?logo=github&style=social)](https://github.com/omrilotan/express-graceful-shutdown)
 
 ## 💀 Shut down server gracefully
+
+[![](https://circleci.com/gh/omrilotan/express-graceful-shutdown.svg?style=svg)](https://circleci.com/gh/omrilotan/express-graceful-shutdown) [![](https://snyk.io/test/github/omrilotan/express-graceful-shutdown/badge.svg)](https://snyk.io/test/github/omrilotan/express-graceful-shutdown) [![](https://api.codeclimate.com/v1/badges/7914da297e8693bba8f6/maintainability)](https://codeclimate.com/github/omrilotan/express-graceful-shutdown/maintainability)
 
 [net.Server](https://nodejs.org/api/net.html#net_class_net_server) or [Express](https://expressjs.com/en/api.html#app.listen), whatever you're using should be fine
 
