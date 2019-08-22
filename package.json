@@ -1,0 +1,41 @@
+{
+  "name": "@routes/graceful-shutdown",
+  "version": "1.2.1",
+  "description": "💀 Shut down server gracefully",
+  "keywords": [
+    "server",
+    "graceful-shutdown",
+    "SIGTERM",
+    "socket termination",
+    "express",
+    "rolling service",
+    "💀"
+  ],
+  "homepage": "https://omrilotan.com/express-graceful-shutdown",
+  "author": "omrilotan",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omrilotan/express-graceful-shutdown.git",
+    "directory": "packages/graceful-shutdown"
+  },
+  "scripts": {
+    "start": "node --experimental-modules --es-module-specifier-resolution=node app",
+    "test": "mocha '**/spec.js' --require .mocha.js --recursive --exclude 'node_modules'",
+    "lint": "eslint '**/*.js' -c .eslintrc"
+  },
+  "main": "index.js",
+  "devDependencies": {
+    "@lets/wait": "^1.0.0",
+    "@omrilotan/eslint-config": "^1.0.0",
+    "abuser": "^2.0.2",
+    "chai": "^4.2.0",
+    "deep-equal-in-any-order": "^1.0.18",
+    "eslint": "^6.2.1",
+    "eslint-plugin-log": "^1.2.3",
+    "express": "^4.17.1",
+    "mocha": "^6.2.0",
+    "sinon": "^7.4.1",
+    "sinon-chai": "^3.3.0"
+  }
+}

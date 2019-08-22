@@ -1,0 +1,16 @@
+{
+	"extends": [
+		"@omrilotan"
+	],
+	"overrides": [
+		{
+			"files": [ "**/spec.js", "**/stubs.js" ],
+			"globals": {
+				"wait": true,
+				"abuser": true,
+				"stub": true,
+				"spy": true
+			}
+		}
+	]
+}
