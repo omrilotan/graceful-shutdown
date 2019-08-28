@@ -1,6 +1,6 @@
 const { clean, override } = abuser(__filename);
 
-const { server, timeout, logger } = require('./lib/stubs');
+const { server, timeout, logger, onsuccess, onfail, pubsub } = require('./lib/stubs');
 
 const procedure = stub();
 let gracefulShutdown;
@@ -11,6 +11,7 @@ describe('graceful-shutdown', () => {
 
 	before(() => {
 		override('./lib/procedure', procedure);
+		override('./lib/pubsub', pubsub);
 		process.stdin.resume = stub();
 		process.on = stub();
 		gracefulShutdown = require('.');
@@ -50,9 +51,11 @@ describe('graceful-shutdown', () => {
 
 		expect(events).to.include('one').and.to.include('two');
 	});
-	it('Should pass server and options to "procedure"', () => {
-		gracefulShutdown(server, {timeout, logger});
-		expect(procedure).to.be.calledWith(server, {timeout, logger});
+	it('Should pass to "procedure": server, options: timeout, logger, pubsub.pub', () => {
+		const { pub } = pubsub;
+
+		gracefulShutdown(server, {timeout, logger, onsuccess, onfail, pub});
+		expect(procedure).to.be.calledWith(server, {timeout, logger, onsuccess, onfail, pub});
 	});
 	it('Should default logger to console', () => {
 		gracefulShutdown();
@@ -69,5 +72,8 @@ describe('graceful-shutdown', () => {
 		gracefulShutdown();
 		expect(process.on.firstCall.args[1]).to.equal('something');
 	});
-
+	it('Should expose sub function from pubsub', () => {
+		const instance = gracefulShutdown();
+		expect(instance.sub).to.equal(pubsub.sub);
+	});
 });

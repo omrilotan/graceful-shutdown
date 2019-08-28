@@ -1,3 +1,9 @@
+# 2.0.0
+## 2019-XX-XX (TBD)
+- Remove `procedure` module
+- Add `onsuccess` and `onfail` arguments (to replace `procedure` behaviour)
+- Add custom functionality to shutdown using a built in pub/sub mechanism
+
 # 1.2.1
 ## 2019-08-22
 [administrative detail] Migrate to another repo
