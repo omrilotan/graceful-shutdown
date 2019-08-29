@@ -1,8 +1,8 @@
-# @routes/graceful-shutdown <a href="https://www.npmjs.com/package/@routes/graceful-shutdown"><img src="https://img.shields.io/npm/v/@routes/graceful-shutdown.svg"></a> [![](https://img.shields.io/badge/source--000000.svg?logo=github&style=social)](https://github.com/omrilotan/express-graceful-shutdown)
+# @routes/graceful-shutdown <a href="https://www.npmjs.com/package/@routes/graceful-shutdown"><img src="https://img.shields.io/npm/v/@routes/graceful-shutdown.svg"></a> [![](https://img.shields.io/badge/source--000000.svg?logo=github&style=social)](https://github.com/omrilotan/graceful-shutdown)
 
 ## 💀 Shut down server gracefully
 
-[![](https://circleci.com/gh/omrilotan/express-graceful-shutdown.svg?style=svg)](https://circleci.com/gh/omrilotan/express-graceful-shutdown) [![](https://snyk.io/test/github/omrilotan/express-graceful-shutdown/badge.svg)](https://snyk.io/test/github/omrilotan/express-graceful-shutdown) [![](https://api.codeclimate.com/v1/badges/7914da297e8693bba8f6/maintainability)](https://codeclimate.com/github/omrilotan/express-graceful-shutdown/maintainability)
+[![](https://circleci.com/gh/omrilotan/graceful-shutdown.svg?style=svg)](https://circleci.com/gh/omrilotan/graceful-shutdown) [![](https://snyk.io/test/github/omrilotan/graceful-shutdown/badge.svg)](https://snyk.io/test/github/omrilotan/graceful-shutdown) [![](https://api.codeclimate.com/v1/badges/7914da297e8693bba8f6/maintainability)](https://codeclimate.com/github/omrilotan/graceful-shutdown/maintainability)
 
 [net.Server](https://nodejs.org/api/net.html#net_class_net_server) or [Express](https://expressjs.com/en/api.html#app.listen), whatever you're using should be fine
 
@@ -20,8 +20,10 @@ graceful(server);
 | option | type | meaning | default
 | - | - | - | -
 | `timeout` | Number | Time (in milliseconds) to wait before forcefully shutting down | `10000` (10 sec)
-| `logger` | Object | Object with `info` and `error` functions (supports async loggers) | `console`
+| `logger` | Object | Object with `info` and `error` functions (supports async loggers). Pass `false` to disable | `console`
 | `events` | Array | Process events to handle | `['SIGTERM', 'SIGINT']`
+| `onsuccess` | Function | Final functionality when shutdown finished correctly | `process.exit(0)`
+| `onfail` | Function | Final functionality when shutdown finished incorrectly | `process.exit(1)`
 
 Example of using options
 ```js
@@ -35,35 +37,25 @@ graceful(server, {
 1. Process termination is interrupted
 2. Open connections are instructed to end (FIN packet) and receive a new timeout to allow them to close in time
 3. The server is firing a close function
-4. After correct closing the process exists with exit code 0
+4. After correct closing: `onsuccess` (default: process exists with exit code 0)
 	- _End correct behaviour_
 5. After `timeout` passes - an error log is printed with the amount of connection that will be forcefully terminated
-6. Process exists with an exit code 1
+6. `onfail`: (default: process exists with an exit code 1)
 
-## Procedure as a module
-In case you wish to apply termination interruption yourself, use `procedure` interface:
+## Add custom functionality to shutdown
+Add behaviour to the graceful shut down process using a built in pub/sub mechanism
 ```js
-const { procedure } = require('@routes/graceful-shutdown');
+const { sub, BEFORE, AFTER } = graceful(server, {...});
 
-const shutdown = procedure(server, {
-	timeout: 1e4,
-	logger: {info: msg => null, error: msg => null},
-	onsuccess: () => null,
-	onfail: () => null,
+// Will be triggered first thing before the procedure starts
+sub(BEFORE, async() => {
+	await flushThrottledThings();
+	await closeDatabaseConnections();
 });
 
-// Apply procedure to termination
-process.stdin.resume();
-process.on('SIGTERM', shutdown);
-process.on('SIGINT', shutdown);
+// Will be triggered once the procedure has ended
+sub(AFTER, () => logger.info('Okay okay, closing down'));
 ```
-
-| option | type | meaning | default
-| - | - | - | -
-| `timeout` | Number | Time (in milliseconds) to wait before forcefully shutting down | `10000` (10 sec)
-| `logger` | Object | Object with `info`, and `error` functions (supports async loggers) | `console`
-| `onsuccess` | Function | Callback when shutdown finished correctly | `process.exit(0)`
-| `onsuccess` | Function | Callback when shutdown finished incorrectly | `process.exit(1)`
 
 ## `server.shuttingDown`
 After shutdown has initiated, the attribute `shuttingDown` is attached to server with value of `true`.
