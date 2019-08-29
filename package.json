@@ -17,8 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/omrilotan/graceful-shutdown.git",
-    "directory": "packages/graceful-shutdown"
+    "url": "git+https://github.com/omrilotan/graceful-shutdown.git"
   },
   "scripts": {
     "start": "node --experimental-modules --es-module-specifier-resolution=node app",
