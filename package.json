@@ -7,16 +7,17 @@
     "graceful-shutdown",
     "SIGTERM",
     "socket termination",
+    "server",
     "express",
     "rolling service",
     "💀"
   ],
-  "homepage": "https://omrilotan.com/express-graceful-shutdown",
+  "homepage": "https://omrilotan.com/graceful-shutdown",
   "author": "omrilotan",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/omrilotan/express-graceful-shutdown.git",
+    "url": "git+https://github.com/omrilotan/graceful-shutdown.git",
     "directory": "packages/graceful-shutdown"
   },
   "scripts": {

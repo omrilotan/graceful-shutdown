@@ -1,8 +1,8 @@
-# @routes/graceful-shutdown <a href="https://www.npmjs.com/package/@routes/graceful-shutdown"><img src="https://img.shields.io/npm/v/@routes/graceful-shutdown.svg"></a> [![](https://img.shields.io/badge/source--000000.svg?logo=github&style=social)](https://github.com/omrilotan/express-graceful-shutdown)
+# @routes/graceful-shutdown <a href="https://www.npmjs.com/package/@routes/graceful-shutdown"><img src="https://img.shields.io/npm/v/@routes/graceful-shutdown.svg"></a> [![](https://img.shields.io/badge/source--000000.svg?logo=github&style=social)](https://github.com/omrilotan/graceful-shutdown)
 
 ## 💀 Shut down server gracefully
 
-[![](https://circleci.com/gh/omrilotan/express-graceful-shutdown.svg?style=svg)](https://circleci.com/gh/omrilotan/express-graceful-shutdown) [![](https://snyk.io/test/github/omrilotan/express-graceful-shutdown/badge.svg)](https://snyk.io/test/github/omrilotan/express-graceful-shutdown) [![](https://api.codeclimate.com/v1/badges/7914da297e8693bba8f6/maintainability)](https://codeclimate.com/github/omrilotan/express-graceful-shutdown/maintainability)
+[![](https://circleci.com/gh/omrilotan/graceful-shutdown.svg?style=svg)](https://circleci.com/gh/omrilotan/graceful-shutdown) [![](https://snyk.io/test/github/omrilotan/graceful-shutdown/badge.svg)](https://snyk.io/test/github/omrilotan/graceful-shutdown) [![](https://api.codeclimate.com/v1/badges/7914da297e8693bba8f6/maintainability)](https://codeclimate.com/github/omrilotan/graceful-shutdown/maintainability)
 
 [net.Server](https://nodejs.org/api/net.html#net_class_net_server) or [Express](https://expressjs.com/en/api.html#app.listen), whatever you're using should be fine
 
@@ -45,7 +45,7 @@ graceful(server, {
 ## Add custom functionality to shutdown
 Add behaviour to the graceful shut down process using a built in pub/sub mechanism
 ```js
-const { sub, BEFORE, AFTER } = graceful(server {...});
+const { sub, BEFORE, AFTER } = graceful(server, {...});
 
 // Will be triggered first thing before the procedure starts
 sub(BEFORE, async() => {
