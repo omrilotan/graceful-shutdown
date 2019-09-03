@@ -67,3 +67,13 @@ app.get(
 	(request, response) => response.status(server.shuttingDown ? 503 : 200).end()
 );
 ```
+
+## What else does graceful expose?
+
+- `{Set} sockets` A reference to the sockets collection
+```js
+const { sockets } = graceful(server, {...});
+
+// Monitor size of set every two minutes
+setInterval(() => stats.time('graceful_stored_sockets', sockets.size), 12e4);
+```

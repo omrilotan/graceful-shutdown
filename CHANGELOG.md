@@ -1,3 +1,7 @@
+# 2.1.0
+## 2019-09-03
+- Expose the sockets set
+
 # 2.0.0
 ## 2019-08-29
 - Remove `procedure` module

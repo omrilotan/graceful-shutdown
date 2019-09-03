@@ -1,8 +1,10 @@
 const { clean, override } = abuser(__filename);
 
-const { server, timeout, logger, onsuccess, onfail, pubsub } = require('./lib/stubs');
+const { server, sockets, timeout, logger, onsuccess, onfail, pubsub } = require('./lib/stubs');
 
-const procedure = stub();
+const action = fake();
+action.sockets = sockets;
+const procedure = fake.returns(action);
 let gracefulShutdown;
 
 describe('graceful-shutdown', () => {
@@ -19,7 +21,7 @@ describe('graceful-shutdown', () => {
 	afterEach(() => {
 		process.stdin.resume.reset();
 		process.on.reset();
-		procedure.reset();
+		procedure.resetHistory();
 	});
 	after(() => {
 		clean('.');
@@ -68,9 +70,9 @@ describe('graceful-shutdown', () => {
 		expect(timeout).to.equal(1e4);
 	});
 	it('Should assign shutdown callback received from "procedure" to process events', () => {
-		procedure.returns('something');
 		gracefulShutdown();
-		expect(process.on.firstCall.args[1]).to.equal('something');
+		const [, arg] = process.on.firstCall.args;
+		expect(arg).to.equal(action);
 	});
 	it('Should expose sub function from pubsub', () => {
 		const instance = gracefulShutdown();

@@ -25,7 +25,7 @@ function graceful(
 	process.stdin.resume();
 	events.forEach(event => process.on(event, action));
 
-	return { sub, BEFORE, AFTER };
+	return { sub, BEFORE, AFTER, sockets: action.sockets };
 }
 
 module.exports = graceful;
