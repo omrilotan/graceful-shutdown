@@ -2,7 +2,7 @@
 
 ## 💀 Shut down server gracefully
 
-[![](https://circleci.com/gh/omrilotan/graceful-shutdown.svg?style=svg)](https://circleci.com/gh/omrilotan/graceful-shutdown) [![](https://snyk.io/test/github/omrilotan/graceful-shutdown/badge.svg)](https://snyk.io/test/github/omrilotan/graceful-shutdown) [![](https://api.codeclimate.com/v1/badges/7914da297e8693bba8f6/maintainability)](https://codeclimate.com/github/omrilotan/graceful-shutdown/maintainability)
+[![](https://github.com/omrilotan/graceful-shutdown/workflows/Publish/badge.svg)](https://github.com/omrilotan/graceful-shutdown/actions) [![](https://snyk.io/test/github/omrilotan/graceful-shutdown/badge.svg)](https://snyk.io/test/github/omrilotan/graceful-shutdown) [![](https://api.codeclimate.com/v1/badges/7914da297e8693bba8f6/maintainability)](https://codeclimate.com/github/omrilotan/graceful-shutdown/maintainability)
 
 [net.Server](https://nodejs.org/api/net.html#net_class_net_server) or [Express](https://expressjs.com/en/api.html#app.listen), whatever you're using should be fine
 
