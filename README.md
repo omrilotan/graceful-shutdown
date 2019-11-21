@@ -69,11 +69,22 @@ app.get(
 ```
 
 ## What else does graceful expose?
+Monitor size of connections set. Should be similar open server connections
 
 - `{Set} sockets` A reference to the sockets collection
 ```js
 const { sockets } = graceful(server, {...});
 
-// Monitor size of set every two minutes
-setInterval(() => stats.time('graceful_stored_sockets', sockets.size), 12e4);
+// Monitor size of open connections every two minutes
+setInterval(() => {
+	stats.gauge('graceful_stored_sockets', sockets.size);
+
+  server.getConnections((error, connections) => {
+    if (error) {
+      throw error;
+    } else {
+      stats.gauge('server_open_connections', connections);
+    }
+  });
+}, 12e4);
 ```
