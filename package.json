@@ -31,7 +31,7 @@
     "abuser": "^2.0.2",
     "chai": "^4.2.0",
     "deep-equal-in-any-order": "^1.0.21",
-    "eslint": "^6.5.1",
+    "eslint": "^7.0.0",
     "eslint-plugin-log": "^1.2.3",
     "express": "^4.17.1",
     "mocha": "^7.0.0",
