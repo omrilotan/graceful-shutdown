@@ -26,7 +26,7 @@
   },
   "main": "index.js",
   "devDependencies": {
-    "@lets/wait": "^1.0.0",
+    "@lets/wait": "^2.0.2",
     "@omrilotan/eslint-config": "^1.1.0",
     "abuser": "^2.0.2",
     "chai": "^4.2.0",
