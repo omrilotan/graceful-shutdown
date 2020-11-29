@@ -15,12 +15,12 @@ function graceful(
 		{
 			timeout = 10000,
 			logger = console,
-			events = ['SIGTERM', 'SIGINT'],
+			events = [ 'SIGTERM', 'SIGINT' ],
 			onsuccess = () => process.exit(0),
 			onfail = () => process.exit(1),
 		} = {},
 ) {
-	const action = procedure(server, {timeout, logger, onsuccess, onfail, pub});
+	const action = procedure(server, { timeout, logger, onsuccess, onfail, pub });
 
 	process.stdin.resume();
 	events.forEach(event => process.on(event, action));

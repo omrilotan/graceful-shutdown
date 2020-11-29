@@ -44,7 +44,7 @@ describe('graceful-shutdown', () => {
 		expect(events).to.include('SIGTERM').and.to.include('SIGINT');
 	});
 	it('Should register to custom events', () => {
-		gracefulShutdown(server, {events: ['one', 'two']});
+		gracefulShutdown(server, { events: [ 'one', 'two' ] });
 
 		const events = [
 			process.on.firstCall,
@@ -56,8 +56,8 @@ describe('graceful-shutdown', () => {
 	it('Should pass to "procedure": server, options: timeout, logger, pubsub.pub', () => {
 		const { pub } = pubsub;
 
-		gracefulShutdown(server, {timeout, logger, onsuccess, onfail, pub});
-		expect(procedure).to.be.calledWith(server, {timeout, logger, onsuccess, onfail, pub});
+		gracefulShutdown(server, { timeout, logger, onsuccess, onfail, pub });
+		expect(procedure).to.be.calledWith(server, { timeout, logger, onsuccess, onfail, pub });
 	});
 	it('Should default logger to console', () => {
 		gracefulShutdown();
@@ -71,7 +71,7 @@ describe('graceful-shutdown', () => {
 	});
 	it('Should assign shutdown callback received from "procedure" to process events', () => {
 		gracefulShutdown();
-		const [, arg] = process.on.firstCall.args;
+		const [ , arg ] = process.on.firstCall.args;
 		expect(arg).to.equal(action);
 	});
 	it('Should expose sub function from pubsub', () => {
